@@ -10,11 +10,14 @@
 
 FROM eclipse/stack-base:ubuntu
 
-ENV TERM xterm
+ENV TERM=xterm
 ENV ANDROID_HOME=/home/user/android-sdk-linux
 ENV MAVEN_VERSION=3.3.9
 ENV M2_HOME=/home/user/apache-maven-$MAVEN_VERSION
-ENV PATH=$M2_HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
+
+ENV JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64 
+
+ENV PATH=$JAVA_HOME/bin:$M2_HOME/bin:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
 
 LABEL che:server:6080:ref=VNC che:server:6080:protocol=http
 
@@ -39,6 +42,13 @@ RUN sudo dpkg --add-architecture i386 && \
     echo "[begin] (Blackbox) \n [exec] (Terminal)     {urxvt -fn "xft:Terminus:size=12"} \n \
           [exec] (Emulator) {emulator64-arm -avd che} \n \
           [end]" | sudo tee -a /etc/X11/blackbox/blackbox-menu
+
+RUN apt-get install --yes curl
+RUN curl --silent --location https://deb.nodesource.com/setup_6.x | sudo bash -
+RUN apt-get install --yes nodejs
+RUN apt-get install --yes build-essential
+
+
 ADD index.html /opt/noVNC/
 ADD supervisord.conf /opt/
 EXPOSE 4403 6080 22
