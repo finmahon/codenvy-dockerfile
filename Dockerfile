@@ -43,7 +43,7 @@ RUN sudo dpkg --add-architecture i386 && \
           [exec] (Emulator) {emulator64-arm -avd che} \n \
           [end]" | sudo tee -a /etc/X11/blackbox/blackbox-menu
 
-RUN wget -qO- https://deb.nodesource.com/setup_7.x | sudo -E bash -
+RUN wget -qO- https://deb.nodesource.com/setup_6.x | sudo -E bash -
 RUN sudo apt update && sudo apt -y install nodejs
 
 
