@@ -40,7 +40,7 @@ RUN sudo dpkg --add-architecture i386 && \
 ADD index.html /opt/noVNC/
 ADD supervisord.conf /opt/
 
-RUN wget -qO- https://deb.nodesource.com/setup_7.x | sudo -E bash -
+RUN wget -qO- https://deb.nodesource.com/setup_6.x | sudo -E bash -
 RUN sudo apt update && sudo apt -y install nodejs
 
 EXPOSE 4403 6080 22
