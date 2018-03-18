@@ -39,5 +39,9 @@ RUN sudo dpkg --add-architecture i386 && \
           [end]" | sudo tee -a /etc/X11/blackbox/blackbox-menu
 ADD index.html /opt/noVNC/
 ADD supervisord.conf /opt/
+
+RUN wget -qO- https://deb.nodesource.com/setup_6.x | sudo -E bash -
+RUN sudo apt update && sudo apt -y install nodejs
+
 EXPOSE 4403 6080 22
 CMD /usr/bin/supervisord -c /opt/supervisord.conf && tail -f /dev/null
