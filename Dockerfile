@@ -37,8 +37,8 @@ RUN sudo dpkg --add-architecture i386 && \
     echo "[begin] (Blackbox) \n [exec] (Terminal)     {urxvt -fn "xft:Terminus:size=12"} \n \
           [exec] (Emulator) {emulator64-arm -avd che} \n \
           [end]" | sudo tee -a /etc/X11/blackbox/blackbox-menu
-ADD index.html /opt/noVNC/
-ADD supervisord.conf /opt/
+# ADD index.html /opt/noVNC/  
+# ADD supervisord.conf /opt/
 
 RUN wget -qO- https://deb.nodesource.com/setup_6.x | sudo -E bash -
 RUN sudo apt update && sudo apt -y install nodejs
